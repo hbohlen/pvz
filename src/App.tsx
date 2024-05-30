@@ -1,15 +1,15 @@
 // src/App.tsx
 import React from 'react';
 import { Canvas } from '@react-three/fiber';
-import { OrbitControls } from '@react-three/drei';
+import MainScene from './scenes/MainScene';
 
 const App: React.FC = () => {
   return (
-    <div style={{ height: '100vh' }}>
+    <div style={{ height: '100vh', width: '100vw' }}>
       <Canvas>
         <ambientLight intensity={0.5} />
         <pointLight position={[10, 10, 10]} />
-        <OrbitControls />
+        <MainScene />
       </Canvas>
     </div>
   );

@@ -15,10 +15,13 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      // Define aliases for imports (if needed)
+      '@assets': '/src/assets',
       '@components': '/src/components',
+      '@ecs': '/src/ecs',
+      '@hooks': '/src/hooks',
+      '@scenes': '/src/scenes',
+      '@styles': '/src/styles',
       '@utils': '/src/utils',
-      // More aliases can be added as per the project structure
     },
   },
   esbuild: {
