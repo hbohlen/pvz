@@ -1,4 +1,3 @@
-// src/App.tsx
 import React from 'react';
 import { Canvas } from '@react-three/fiber';
 import MainScene from './scenes/MainScene';
