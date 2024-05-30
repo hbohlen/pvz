@@ -16,8 +16,9 @@ module.exports = {
   rules: {
     'react-refresh/only-export-components': [
       'warn',
-      { allowConstantExport: true },
+      { allowConstantExport: true }, // Add a comma here
     ],
+    'linebreak-style': ['error', 'unix'],
     'prettier/prettier': ['error'], // Enforces Prettier formatting as ESLint errors
   },
 };
