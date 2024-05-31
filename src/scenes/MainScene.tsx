@@ -6,6 +6,7 @@ import Position from '../ecs/components/Position';
 import MeshComponent from '../ecs/components/MeshComponent';
 import Clickable from '../ecs/components/Clickable';
 import Hoverable from '../ecs/components/Hoverable';
+import { isTopFace } from '../utils/raycaster';
 
 const MainScene: React.FC = () => {
   const { camera } = useThree();
@@ -50,11 +51,15 @@ const MainScene: React.FC = () => {
         cube.addComponent(
           'hoverable',
           new Hoverable(
-            () => {
-              setHoveredId(id);
+            (event: ThreeEvent<PointerEvent>) => {
+              if (isTopFace(event)) {
+                setHoveredId(id);
+              }
             },
-            () => {
-              setHoveredId(null);
+            (event: ThreeEvent<PointerEvent>) => {
+              if (isTopFace(event)) {
+                setHoveredId(null);
+              }
             }
           )
         );
