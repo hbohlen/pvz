@@ -21,7 +21,7 @@ const MainScene: React.FC = () => {
     const newEntities: Entity[] = [];
     const gridWidth = 9;
     const gridLength = 6;
-    const cubeSize = 1.1; // Slightly larger than 1 to avoid overlap
+    const cubeSize = 1; // Slightly larger than 1 to avoid overlap
 
     // Calculate the center offset
     const offsetX = ((gridWidth - 1) * cubeSize) / 2;
@@ -30,7 +30,7 @@ const MainScene: React.FC = () => {
     for (let x = 0; x < gridWidth; x++) {
       for (let z = 0; z < gridLength; z++) {
         const cube = new Entity(x * gridLength + z);
-        const color = '#00ff00'; // Uniform green color
+        const color = (x + z) % 2 === 0 ? '#00ff00' : '#007700';
         cube.addComponent(
           'position',
           new Position(x * cubeSize - offsetX, 0, z * cubeSize - offsetZ)
