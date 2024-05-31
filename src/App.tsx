@@ -5,7 +5,7 @@ import MainScene from './scenes/MainScene';
 const App: React.FC = () => {
   return (
     <div style={{ height: '100vh', width: '100vw' }}>
-      <Canvas camera={{ position: [0, 5, 10], fov: 50 }}>
+      <Canvas camera={{ position: [15, 20, 15], fov: 25 }}>
         <ambientLight intensity={0.5} />
         <pointLight position={[10, 10, 10]} />
         <MainScene />

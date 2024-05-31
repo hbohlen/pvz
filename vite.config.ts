@@ -5,7 +5,7 @@ import react from '@vitejs/plugin-react';
 export default defineConfig({
   plugins: [react()],
   build: {
-    sourcemap: true, // Enable source maps for better debugging in development
+    sourcemap: true, // Enable source maps for production builds
     minify: 'esbuild', // Use esbuild for faster builds, tweak as per your preference
   },
   server: {
@@ -25,6 +25,6 @@ export default defineConfig({
     },
   },
   esbuild: {
-    // Include any necessary esbuild plugin options or settings
+    sourcemap: true, // Ensure esbuild generates source maps
   },
 });

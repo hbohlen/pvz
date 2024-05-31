@@ -17,7 +17,7 @@ const RenderSystem: React.FC<{ entities: Entity[] }> = ({ entities }) => {
         return (
           <mesh key={entity.id} position={[position.x, position.y, position.z]}>
             <boxGeometry args={mesh.geometry} />
-            <meshStandardMaterial {...mesh.material} />
+            <meshStandardMaterial color={mesh.material.color} />
           </mesh>
         );
       })}
