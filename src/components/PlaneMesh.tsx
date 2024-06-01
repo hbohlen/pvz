@@ -1,14 +1,10 @@
-import React from "react";
+import React from 'react';
 
-const PlaneMesh: React.FC<{
-  position: [number, number, number];
-  rotation: [number, number, number];
-  material: any;
-}> = ({ position, rotation, material }) => {
+const PlaneMesh: React.FC = () => {
   return (
-    <mesh position={position} rotation={rotation}>
-      <planeGeometry args={[1, 1]} />
-      <meshStandardMaterial {...material} />
+    <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0, 0]}>
+      <planeGeometry attach='geometry' args={[10, 10]} />
+      <meshStandardMaterial attach='material' color='lightblue' />
     </mesh>
   );
 };
