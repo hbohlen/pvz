@@ -1,48 +1,51 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Canvas, useThree } from '@react-three/fiber';
-import * as THREE from 'three';
 import Entity from '@ecs/entities/Entity';
 import PlaneComponent from '@ecs/components/PlaneComponent';
 import { OrbitControls } from '@react-three/drei';
 import '../styles/MainScene.css';
+import RenderSystem from '@ecs/systems/RenderSystem';
 
 // MainScene component sets up the 3D canvas and scene content
 const MainScene: React.FC = () => {
+  const [entities, setEntities] = useState<Entity[]>([]);
+
+  useEffect(() => {
+    const newEntities: Entity[] = [];
+    const entity = new Entity(1);
+    const planeComponent = new PlaneComponent();
+    entity.addComponent('plane', planeComponent);
+    newEntities.push(entity);
+    setEntities(newEntities);
+  }, []);
+
   return (
     <Canvas className='canvas'>
-      {/* SceneContent initializes 3D objects and camera */}
-      <SceneContent />
-      {/* Adds ambient light to the scene */}
+      <SceneContent entities={entities} />
       <ambientLight />
-      {/* Adds a point light at the specified position */}
       <pointLight position={[10, 10, 10]} />
-      {/* Adds orbit controls to allow camera movement */}
       <OrbitControls />
     </Canvas>
   );
 };
 
 // SceneContent component initializes the 3D objects and camera
-const SceneContent: React.FC = () => {
-  // useThree hook provides access to the Three.js scene and camera
+const SceneContent: React.FC<{ entities: Entity[] }> = ({ entities }) => {
   const { camera, scene } = useThree();
 
   useEffect(() => {
-    // Create a new entity with an ID of 1
-    const entity = new Entity(1);
-    // Create a new PlaneComponent
-    const planeComponent = new PlaneComponent();
-    // Add the PlaneComponent to the entity
-    entity.addComponent('plane', planeComponent);
-    // Add the plane's mesh to the scene
-    scene.add(planeComponent.mesh);
+    if (entities.length > 0) {
+      const entity = entities[0];
+      const planeComponent = entity.getComponent<PlaneComponent>('plane');
+      if (planeComponent) {
+        scene.add(planeComponent.mesh);
+        camera.position.set(0, 5, 10);
+        camera.lookAt(planeComponent.mesh.position);
+      }
+    }
+  }, [camera, scene, entities]);
 
-    // Position the camera and make it look at the plane
-    camera.position.set(0, 5, 10);
-    camera.lookAt(planeComponent.mesh.position);
-  }, [camera, scene]);
-
-  return null; // No visual output from this component
+  return <RenderSystem entities={entities} />;
 };
 
 export default MainScene;

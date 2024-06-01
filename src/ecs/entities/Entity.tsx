@@ -1,30 +1,21 @@
-import Position from '../components/Position';
+type Component = any; // Define a proper type for components
 
-// Entity class represents an entity in the ECS (Entity-Component-System) architecture
 class Entity {
-  // Unique identifier for the entity
   id: number;
-  // Map to store components associated with the entity
-  components: Map<string, any>;
+  components: Map<string, Component>;
 
-  // Constructor to initialize the entity with a unique ID
   constructor(id: number) {
     this.id = id;
     this.components = new Map();
   }
 
-  // Method to add a component to the entity
-  // name: The name of the component
-  // component: The component instance to be added
-  addComponent(name: string, component: any) {
+  addComponent(name: string, component: Component) {
     this.components.set(name, component);
+    return this;
   }
 
-  // Method to retrieve a component from the entity
-  // name: The name of the component to retrieve
-  // Returns the component instance if found, otherwise undefined
-  getComponent<T>(name: string): T {
-    return this.components.get(name);
+  getComponent<T extends Component>(name: string): T | undefined {
+    return this.components.get(name) as T;
   }
 }
 
