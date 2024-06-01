@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Canvas, useThree } from '@react-three/fiber';
+import * as THREE from 'three'; // Ensure THREE is imported
 import Entity from '@ecs/entities/Entity';
-import PlaneComponent from '@ecs/components/PlaneComponent';
+import CubeComponent from '@ecs/components/CubeComponent';
 import { OrbitControls } from '@react-three/drei';
 import '../styles/MainScene.css';
 import RenderSystem from '@ecs/systems/RenderSystem';
@@ -13,8 +14,8 @@ const MainScene: React.FC = () => {
   useEffect(() => {
     const newEntities: Entity[] = [];
     const entity = new Entity(1);
-    const planeComponent = new PlaneComponent();
-    entity.addComponent('plane', planeComponent);
+    const cubeComponent = new CubeComponent();
+    entity.addComponent('cube', cubeComponent);
     newEntities.push(entity);
     setEntities(newEntities);
   }, []);
@@ -36,11 +37,13 @@ const SceneContent: React.FC<{ entities: Entity[] }> = ({ entities }) => {
   useEffect(() => {
     if (entities.length > 0) {
       const entity = entities[0];
-      const planeComponent = entity.getComponent<PlaneComponent>('plane');
-      if (planeComponent) {
-        scene.add(planeComponent.mesh);
-        camera.position.set(0, 5, 10);
-        camera.lookAt(planeComponent.mesh.position);
+      const cubeComponent = entity.getComponent<CubeComponent>('cube');
+      if (cubeComponent) {
+        cubeComponent.planes.forEach(planeComponent =>
+          scene.add(planeComponent.mesh)
+        );
+        camera.position.set(0, 10, 20);
+        camera.lookAt(new THREE.Vector3(0, 0, 0));
       }
     }
   }, [camera, scene, entities]);
