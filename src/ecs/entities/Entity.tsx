@@ -1,5 +1,4 @@
 import Position from '../components/Position';
-import MeshComponent from '../components/MeshComponent';
 
 class Entity {
   id: number;
