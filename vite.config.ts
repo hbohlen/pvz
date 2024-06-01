@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react()], // Use the React plugin for Vite
   build: {
     sourcemap: true, // Enable source maps for production builds
     minify: 'esbuild', // Use esbuild for faster builds, tweak as per your preference
@@ -15,13 +15,13 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      '@assets': '/src/assets',
-      '@components': '/src/components',
-      '@ecs': '/src/ecs',
-      '@hooks': '/src/hooks',
-      '@scenes': '/src/scenes',
-      '@styles': '/src/styles',
-      '@utils': '/src/utils',
+      '@assets': '/src/assets', // Alias for assets directory
+      '@components': '/src/components', // Alias for components directory
+      '@ecs': '/src/ecs', // Alias for ECS directory
+      '@hooks': '/src/hooks', // Alias for hooks directory
+      '@scenes': '/src/scenes', // Alias for scenes directory
+      '@styles': '/src/styles', // Alias for styles directory
+      '@utils': '/src/utils', // Alias for utils directory
     },
   },
   esbuild: {

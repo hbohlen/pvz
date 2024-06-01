@@ -1,29 +1,25 @@
 {
   "compilerOptions": {
-    "target": "ES2020",
-    "useDefineForClassFields": true,
-    "lib": ["ES2020", "DOM", "DOM.Iterable"],
-    "module": "ESNext",
-    "skipLibCheck": true,
-    "baseUrl": "./",
+    "target": "ES2020", // Specify ECMAScript target version
+    "useDefineForClassFields": true, // Use define for class fields
+    "lib": ["ES2020", "DOM", "DOM.Iterable"], // Specify library files to be included
+    "module": "ESNext", // Specify module code generation
+    "skipLibCheck": true, // Skip type checking of declaration files
+    "baseUrl": "./", // Base directory to resolve non-relative module names
     "paths": {
-      "@ecs/*": ["src/ecs/*"]
+      "@ecs/*": ["src/ecs/*"] // Path mapping for module resolution
     },
-
-    /* Bundler mode */
-    "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react-jsx",
-
-    /* Linting */
-    "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "moduleResolution": "bundler", // Module resolution strategy
+    "allowImportingTsExtensions": true, // Allow importing TypeScript files
+    "resolveJsonModule": true, // Include modules imported with .json extension
+    "isolatedModules": true, // Ensure each file can be safely transpiled without relying on other imports
+    "noEmit": true, // Do not emit outputs
+    "jsx": "react-jsx", // Specify JSX code generation
+    "strict": true, // Enable all strict type-checking options
+    "noUnusedLocals": true, // Report errors on unused locals
+    "noUnusedParameters": true, // Report errors on unused parameters
+    "noFallthroughCasesInSwitch": true // Report errors for fallthrough cases in switch statements
   },
-  "include": ["src"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "include": ["src"], // Include all files in the src directory
+  "references": [{ "path": "./tsconfig.node.json" }] // Reference to another tsconfig file
 }
