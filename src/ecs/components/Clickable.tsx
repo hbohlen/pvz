@@ -2,15 +2,15 @@ import * as THREE from 'three';
 import { useState } from 'react';
 import { useFrame } from '@react-three/fiber';
 
-const Hoverable: React.FC<{ mesh: THREE.Mesh; children: React.ReactNode }> = ({
+const Clickable: React.FC<{ mesh: THREE.Mesh; children?: React.ReactNode }> = ({
   mesh,
   children,
 }) => {
-  const [hovered, setHovered] = useState(false);
+  const [clicked, setClicked] = useState(false);
 
   useFrame(() => {
-    if (hovered) {
-      (mesh.material as THREE.MeshBasicMaterial).color.set(0xff0000);
+    if (clicked) {
+      (mesh.material as THREE.MeshBasicMaterial).color.set(0x0000ff);
     } else {
       (mesh.material as THREE.MeshBasicMaterial).color.set(0x00ff00);
     }
@@ -20,12 +20,14 @@ const Hoverable: React.FC<{ mesh: THREE.Mesh; children: React.ReactNode }> = ({
     <>
       <primitive
         object={mesh}
-        onPointerOver={() => setHovered(true)}
-        onPointerOut={() => setHovered(false)}
+        onClick={() => {
+          setClicked(true);
+          console.log('Cube clicked');
+        }}
       />
       {children}
     </>
   );
 };
 
-export default Hoverable;
+export default Clickable;
