@@ -13,10 +13,18 @@ const MainScene: React.FC = () => {
 
   useEffect(() => {
     const newEntities: Entity[] = [];
-    const entity = new Entity(1);
-    const cubeComponent = new CubeComponent();
-    entity.addComponent('cube', cubeComponent);
-    newEntities.push(entity);
+
+    // First cube
+    const entity1 = new Entity(1);
+    const cubeComponent1 = new CubeComponent();
+    entity1.addComponent('cube', cubeComponent1);
+    newEntities.push(entity1);
+
+    // Second cube
+    const entity2 = new Entity(2);
+    const cubeComponent2 = new CubeComponent();
+    entity2.addComponent('cube', cubeComponent2);
+    newEntities.push(entity2);
     setEntities(newEntities);
   }, []);
 
@@ -36,15 +44,22 @@ const SceneContent: React.FC<{ entities: Entity[] }> = ({ entities }) => {
 
   useEffect(() => {
     if (entities.length > 0) {
-      const entity = entities[0];
-      const cubeComponent = entity.getComponent<CubeComponent>('cube');
-      if (cubeComponent) {
-        cubeComponent.planes.forEach(planeComponent =>
-          scene.add(planeComponent.mesh)
-        );
-        camera.position.set(0, 10, 20);
-        camera.lookAt(new THREE.Vector3(0, 0, 0));
-      }
+      entities.forEach((entity, index) => {
+        const cubeComponent = entity.getComponent<CubeComponent>('cube');
+        if (cubeComponent) {
+          cubeComponent.planes.forEach(planeComponent => {
+            scene.add(planeComponent.mesh);
+          });
+          // Position the second cube to the right of the first cube
+          if (index === 1) {
+            cubeComponent.planes.forEach(planeComponent => {
+              planeComponent.mesh.position.x += 5; // Adjust based on cube size
+            });
+          }
+        }
+      });
+      camera.position.set(0, 10, 20);
+      camera.lookAt(new THREE.Vector3(0, 0, 0));
     }
   }, [camera, scene, entities]);
 
