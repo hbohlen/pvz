@@ -24,7 +24,15 @@ const RenderSystem: React.FC<{ entities: Entity[] }> = ({ entities }) => {
             <group key={entity.id}>
               {cubeComponent.planes.map((planeComponent, index) => (
                 <Hoverable key={index} mesh={planeComponent.mesh}>
-                  <Clickable mesh={planeComponent.mesh} />
+                  <Clickable
+                    mesh={planeComponent.mesh}
+                    clicked={cubeComponent.clickedStates[index]}
+                    setClicked={value => {
+                      const newClickedStates = [...cubeComponent.clickedStates];
+                      newClickedStates[index] = value;
+                      cubeComponent.clickedStates = newClickedStates;
+                    }}
+                  />
                 </Hoverable>
               ))}
             </group>
